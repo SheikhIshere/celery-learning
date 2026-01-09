@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  django:
+    build: .
+    container_name: django_app
+    command: bash -c "cd App && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  celery:
+    build: .
+    container_name: celery_worker
+    command: bash -c "cd App && celery -A core worker -l info"
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  celery-beat:
+    build: .
+    container_name: celery_beat
+    command: bash -c "cd App && celery -A core beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+    - "6380:6379"  # change host port to 6380
+
+
