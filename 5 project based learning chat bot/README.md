@@ -18,3 +18,11 @@
 # Add a Database to Django with Postgres and Docker
 
 How to add a Database to Django with Postgres and Docker.
+
+### while thing is failed due to api conflict, the man using open ai which is paid and i am using gemini which is free  
+### i am a fking student i cannot pay money 
+
+# how to do makemigration type command
+docker compose run --rm backend sh -c "python manage.py makemigrations && python manage.py migrate"
+
+this is a quite successful

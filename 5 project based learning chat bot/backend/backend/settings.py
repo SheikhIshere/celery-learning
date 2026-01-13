@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -134,4 +138,4 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 
-GMINI_API_KEY = os.environ.ge('GMINI_API_KEY')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
