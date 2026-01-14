@@ -43,8 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'core'
+    'core',
+    'drf_spectacular',
+
 ]
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,3 +146,18 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+
+# documentation configuration
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Chat Bot',
+    'DESCRIPTION': 'This is my first chat bot prototype project',
+    'VERSION': '1.0.0',
+    'SERVE_PUBLIC': True,
+    'SERVE_INCLUDE_SCHEMA': False,  # prevents duplicates
+    'OPERATION_ID': '{method}_{path}_{model}',  # unique operation IDs
+    'TAGS': [
+        {'name': 'chat session'},
+        {'name': 'chat request'},
+    ],
+    'SCHEMA_PATH_PREFIX': '/v1/api/chat/',  # matches your router prefix
+}

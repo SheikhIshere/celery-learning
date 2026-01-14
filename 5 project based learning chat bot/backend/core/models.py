@@ -150,7 +150,10 @@ class AiRequest(models.Model):
     def _queue_job(self):
         """Dispatches the request to Celery."""
         from .tasks import handle_ai_request_job
-        handle_ai_request_job.delay(self.id)
+        from django.db import transaction # this is for keep the message in queue so user cannot post before getting response
+        transaction.on_commit(
+            lambda:handle_ai_request_job.delay(self.id)
+        )
 
     def handle(self):
         """
@@ -164,9 +167,26 @@ class AiRequest(models.Model):
             client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
             model_name = "gemma-3-27b-it"
 
+            # to keep track of our conversation history this like last message
+            if self.session:
+                history = self.session._conversation_text()
+
+            system_instr = (
+                "You are a helpful assistant. Use the conversation history below as the source of truth "
+                "about earlier messages in this session. If the user asks about earlier facts (for example, "
+                "their name and all personal details), answer using that history. Do not invent previous messages."
+            )
+
+            prompt = (
+                f"{system_instr}\n\n"
+                f"Conversation:\n{history}\n"
+                f"User: {self.message}\n"
+                f"Assistant:"
+            )
+
             completion = client.models.generate_content(
                 model=model_name,
-                contents=self.message
+                contents=prompt
             )
 
             # defensive extraction of text

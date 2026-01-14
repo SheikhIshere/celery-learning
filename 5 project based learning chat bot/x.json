@@ -1,14 +1,44 @@
 [
     {
         "count": 1,
-        "message": "hi",
-        "response": "Hi there! 👋 \n\nHow can I help you today? Just let me know what you're thinking, or if you just wanted to say hi, that's great too! \n\nI can:\n\n* **Answer questions:** About pretty much anything!\n* **Generate text:** Like stories, poems, code, scripts, musical pieces, email, letters, etc.\n* **Translate languages.**\n* **Summarize text.**\n* **Help you brainstorm.**\n* **Just chat!**\n\n\n\n",
-        "created_at": "2026-01-13T18:25:36.902499+00:00"
+        "message": "hey my name is imran what's your name",
+        "response": "Hi Imran, my name is Gemma. It's nice to meet you!\n",
+        "created_at": "2026-01-14T17:57:58.751263+00:00"
     },
     {
         "count": 2,
-        "message": "what's your name , answer me in one word",
-        "response": "Gemma.",
-        "created_at": "2026-01-13T18:27:06.091269+00:00"
+        "message": "what's my name",
+        "response": "Your name is Imran.",
+        "created_at": "2026-01-14T17:58:57.009020+00:00"
+    },
+    {
+        "count": 3,
+        "message": "what's my agge",
+        "response": "I do not have information about your age. We only previously discussed your name, which is Imran.",
+        "created_at": "2026-01-14T18:07:11.253745+00:00"
+    },
+    {
+        "count": 4,
+        "message": "what's my age",
+        "response": "I do not have information about your age. We only previously discussed your name, which is Imran.",
+        "created_at": "2026-01-14T18:07:47.349368+00:00"
+    },
+    {
+        "count": 5,
+        "message": "i am 18",
+        "response": "Okay, good to know you are 18!",
+        "created_at": "2026-01-14T18:09:59.723263+00:00"
+    },
+    {
+        "count": 6,
+        "message": "what's my age",
+        "response": "You are 18.",
+        "created_at": "2026-01-14T18:10:08.501229+00:00"
+    },
+    {
+        "count": 7,
+        "message": "what's my name",
+        "response": "Your name is Imran.",
+        "created_at": "2026-01-14T18:10:28.575357+00:00"
     }
 ]
